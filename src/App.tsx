@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { theme } from './theme/theme';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { AppLayout } from './components/common/AppLayout';
+import { Dashboard } from './pages/Dashboard';
+import { MyProfile } from './pages/MyProfile';
+import { ManageUsers } from './pages/ManageUsers';
+import { ManagePatients } from './pages/ManagePatients';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AppLayout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/profile" element={<MyProfile />} />
+              <Route path="/users" element={<ManageUsers />} />
+              <Route path="/patients" element={<ManagePatients />} />
+            </Routes>
+          </AppLayout>
+        </ThemeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
