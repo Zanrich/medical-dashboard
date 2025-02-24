@@ -1,32 +1,35 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { theme } from './theme/theme';
-import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { AppLayout } from './components/common/AppLayout';
+import { PracticeProvider } from './store/PracticeContext';
+import { Routes, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard';
-import { MyProfile } from './pages/MyProfile';
+import { ManagePractices } from './pages/ManagePractices';
 import { ManageUsers } from './pages/ManageUsers';
 import { ManagePatients } from './pages/ManagePatients';
+import { MyProfile } from './pages/MyProfile';
 
 function App() {
   return (
-    <ErrorBoundary>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <PracticeProvider>
           <AppLayout>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<MyProfile />} />
+              <Route path="/practices" element={<ManagePractices />} />
               <Route path="/users" element={<ManageUsers />} />
               <Route path="/patients" element={<ManagePatients />} />
             </Routes>
           </AppLayout>
-        </ThemeProvider>
-      </BrowserRouter>
-    </ErrorBoundary>
+        </PracticeProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

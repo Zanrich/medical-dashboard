@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { COLORS, BREAKPOINTS } from './constants';
+import '../assets/fonts/Montserrat.css';
 
 export const theme = createTheme({
   palette: {
@@ -32,7 +33,7 @@ export const theme = createTheme({
     values: BREAKPOINTS,
   },
   typography: {
-    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+    fontFamily: 'Montserrat, regular',
     h1: {
       fontSize: '2rem',
       fontWeight: 600,
