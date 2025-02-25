@@ -34,7 +34,7 @@ export const Dashboard: React.FC = () => {
   ], []);
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ px: 5, py: 4 }}>
       <Typography variant="h4" gutterBottom>
         Welcome Andrew!
       </Typography>

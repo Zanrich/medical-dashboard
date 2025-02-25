@@ -7,6 +7,12 @@ export const COLORS = {
     text: {
       primary: '#212b36',
       secondary: '#637381',
+      subtext: '#67ADB9',
+    },
+    notifications: {
+      header: '#414141',
+      subheader: '#747474',
+      time: '#BCBCBC',
     },
     background: {
       default: '#fafafa',

@@ -1,6 +1,20 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteOptions } from '@mui/material/styles';
 import { COLORS, BREAKPOINTS } from './constants';
 import '../assets/fonts/Montserrat.css';
+
+declare module '@mui/material/styles' {
+  interface PaletteOptions {
+    notifications?: {
+      header: string;
+      subheader: string;
+      time: string;
+    };
+  }
+
+  interface TypeText {
+    subtext: string;
+  }
+}
 
 export const theme = createTheme({
   palette: {
@@ -23,11 +37,17 @@ export const theme = createTheme({
     text: {
       primary: COLORS.text.primary,
       secondary: COLORS.text.secondary,
+      subtext: COLORS.text.subtext,
     },
     background: {
       default: COLORS.background.default,
       paper: COLORS.background.paper,
     },
+    notifications: {
+      header: COLORS.notifications.header,
+      subheader: COLORS.notifications.subheader,
+      time: COLORS.notifications.time,
+    }
   },
   breakpoints: {
     values: BREAKPOINTS,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, styled } from '@mui/material';
+import { Box, styled, useTheme, useMediaQuery } from '@mui/material';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 
@@ -12,9 +12,9 @@ const LayoutRoot = styled(Box)(({ theme }) => ({
 const LayoutContent = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   paddingTop: 64, // Header height
-//   paddingLeft: 280, // Sidebar width
-  [theme.breakpoints.down('md')]: {
-    paddingLeft: 0,
+  marginLeft: 0, // Sidebar width
+  [theme.breakpoints.down('lg')]: { // Changed from 'md' to 'lg'
+    marginLeft: 0,
   },
 }));
 
@@ -23,11 +23,20 @@ interface AppLayoutProps {
 }
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+  const theme = useTheme();
+  const isLargeDown = useMediaQuery(theme.breakpoints.down('lg')); // Added for lg breakpoint
+
   return (
     <LayoutRoot>
       <Header />
       <Sidebar />
-      <LayoutContent>{children}</LayoutContent>
+      <LayoutContent 
+        sx={{
+          pt: isLargeDown ? '56px' : '64px', // Add extra top padding for mobile to account for burger menu
+        }}
+      >
+        {children}
+      </LayoutContent>
     </LayoutRoot>
   );
 };
