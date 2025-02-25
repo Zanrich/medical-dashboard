@@ -47,7 +47,12 @@ export const theme = createTheme({
       header: COLORS.notifications.header,
       subheader: COLORS.notifications.subheader,
       time: COLORS.notifications.time,
-    }
+    },
+    grey: {
+      100: COLORS.grey[100],
+      200:  COLORS.grey[200],
+      300:  COLORS.grey[300],
+    },
   },
   breakpoints: {
     values: BREAKPOINTS,

@@ -40,7 +40,15 @@ export const Dashboard: React.FC = () => {
   ], []);
 
   return (
-    <Box sx={{ px: 5, py: 4 }}>
+    <Box 
+      sx={{ 
+        px: 5, 
+        py: 4,
+        [theme.breakpoints.down('lg')]: {
+          p: 1.25,
+        },
+      
+      }}>
       <Typography variant="h4" gutterBottom color='notifications.header' sx={{fontWeight: 700, fontSize: '20px', lineHeight: '30px'}}>
         Welcome Andrew!
       </Typography>
@@ -75,14 +83,7 @@ export const Dashboard: React.FC = () => {
       </Grid> */}
 
       <Box sx={{ pt: 4 }}>
-        <Typography variant="h6" gutterBottom>
-          Newest Practices
-        </Typography>
-        <PracticesTable
-          practices={practices}
-          onEdit={(practice) => console.log('Edit:', practice)}
-          onDelete={(practice) => console.log('Delete:', practice)}
-        />
+        <PracticesTable />
       </Box>
     </Box>
   );
