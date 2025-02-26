@@ -226,7 +226,7 @@ const Users: React.FC = () => {
           <Box
             sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
           >
-             <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>
+            <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>
               Users
             </Typography>
             <Button

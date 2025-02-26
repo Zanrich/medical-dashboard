@@ -149,7 +149,7 @@ const Logs: React.FC = () => {
     <PageTransition>
       <Box sx={{ p: 3 }}>
         <FadeIn duration={0.6}>
-             <Typography variant="h5" gutterBottom component="h1" sx={{ fontWeight: 600 }}>
+          <Typography variant="h5" gutterBottom component="h1" sx={{ fontWeight: 600 }}>
             System Logs
           </Typography>
         </FadeIn>

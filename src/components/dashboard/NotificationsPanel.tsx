@@ -9,9 +9,10 @@ import {
   Button,
   Divider,
 } from '@mui/material';
-import { Trash2, Clock3 } from 'lucide-react';
+import { Clock3 } from 'lucide-react';
 
 import ProfilePicture from '../../assets/images/profilePicture.jpeg';
+import trashIcon from '../../assets/icons/greybin.png';
 
 const StyledPopover = styled(Popover)(({ theme }) => ({
   '& .MuiPaper-root': {
@@ -114,7 +115,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ anchorEl
                 src={ProfilePicture ? ProfilePicture : notification.user.avatar}
                 sx={{ width: 40, height: 40, mr: 2 }}
               />
-              <Box sx={{ flex: 1 }}>
+              <Box sx={{ flex: 1, py: 1 }}>
                 <Typography
                   variant="subtitle2"
                   color="notifications.header"
@@ -156,7 +157,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ anchorEl
                 }}
                 sx={{ color: 'text.secondary' }}
               >
-                <Trash2 size={20} color={'#BCBCBC'} />
+                <img width={20} src={trashIcon || '/placeholder.svg'} alt="TrashIcon" />
               </IconButton>
             </Box>
           ))}
@@ -169,8 +170,8 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ anchorEl
             justifyContent: 'center',
             color: 'text.subtext',
             lineHeight: '22px',
-            height: 34,
-            p: 1,
+            height: '34px',
+            m: 1,
             '&:hover': {
               backgroundColor: 'transparent',
               color: 'primary.dark',
