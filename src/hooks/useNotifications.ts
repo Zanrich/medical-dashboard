@@ -8,9 +8,7 @@ export const useNotifications = () => {
   const markAsRead = useCallback((notificationId: string) => {
     setNotifications((prev) =>
       prev.map((notification) =>
-        notification.id === notificationId
-          ? { ...notification, read: true }
-          : notification
+        notification.id === notificationId ? { ...notification, read: true } : notification
       )
     );
     setUnreadCount((prev) => Math.max(0, prev - 1));

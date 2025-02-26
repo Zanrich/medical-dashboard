@@ -22,14 +22,7 @@ import {
   Tooltip,
   styled,
 } from '@mui/material';
-import {
-  Search,
-  FilterList,
-  Info,
-  CheckCircle,
-  Error,
-  Warning,
-} from '@mui/icons-material';
+import { Search, Info, CheckCircle, Error, Warning } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { PageTransition } from '../components/animations/PageTransition';
 import { FadeIn } from '../components/animations/FadeIn';
@@ -43,24 +36,26 @@ interface Log {
   details: string;
 }
 
-const StatusChip = styled(Chip)<{ status: 'success' | 'error' | 'warning' }>(({ theme, status }) => ({
-  borderRadius: 16,
-  height: 24,
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  ...(status === 'success' && {
-    backgroundColor: '#E9FCD4',
-    color: '#54D62C',
-  }),
-  ...(status === 'error' && {
-    backgroundColor: '#FFE7D9',
-    color: '#FF4842',
-  }),
-  ...(status === 'warning' && {
-    backgroundColor: '#FFF7CD',
-    color: '#FFC107',
-  }),
-}));
+const StatusChip = styled(Chip)<{ status: 'success' | 'error' | 'warning' }>(
+  ({ theme, status }) => ({
+    borderRadius: 16,
+    height: 24,
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    ...(status === 'success' && {
+      backgroundColor: '#E9FCD4',
+      color: '#54D62C',
+    }),
+    ...(status === 'error' && {
+      backgroundColor: '#FFE7D9',
+      color: '#FF4842',
+    }),
+    ...(status === 'warning' && {
+      backgroundColor: '#FFF7CD',
+      color: '#FFC107',
+    }),
+  })
+);
 
 const MotionTableRow = motion(TableRow);
 
@@ -98,26 +93,20 @@ const Logs: React.FC = () => {
       'Complete Treatment',
       'System Backup',
     ];
-    
-    const users = [
-      'Adrian Stefan',
-      'John Smith',
-      'Emma Johnson',
-      'Michael Brown',
-      'System',
-    ];
-    
+
+    const users = ['Adrian Stefan', 'John Smith', 'Emma Johnson', 'Michael Brown', 'System'];
+
     const statuses: ('success' | 'error' | 'warning')[] = ['success', 'error', 'warning'];
-    
+
     return Array.from({ length: 50 }, (_, i) => {
       const action = actions[Math.floor(Math.random() * actions.length)];
       const user = users[Math.floor(Math.random() * users.length)];
       const status = statuses[Math.floor(Math.random() * statuses.length)];
-      
+
       // Generate a random date within the last 30 days
       const date = new Date();
       date.setDate(date.getDate() - Math.floor(Math.random() * 30));
-      
+
       return {
         id: `LOG-${1000 + i}`,
         timestamp: date.toLocaleString(),
@@ -133,15 +122,15 @@ const Logs: React.FC = () => {
 
   // Filter logs based on search term and filters
   const filteredLogs = logs.filter((log) => {
-    const matchesSearch = 
+    const matchesSearch =
       log.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       log.user.toLowerCase().includes(searchTerm.toLowerCase()) ||
       log.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
       log.details.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesStatus = statusFilter === 'all' || log.status === statusFilter;
     const matchesAction = actionFilter === 'all' || log.action === actionFilter;
-    
+
     return matchesSearch && matchesStatus && matchesAction;
   });
 
@@ -154,7 +143,7 @@ const Logs: React.FC = () => {
     setPage(0);
   };
 
-  const uniqueActions = Array.from(new Set(logs.map(log => log.action)));
+  const uniqueActions = Array.from(new Set(logs.map((log) => log.action)));
 
   return (
     <PageTransition>

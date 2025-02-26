@@ -9,17 +9,16 @@ interface StaggeredFadeInProps {
   distance?: number;
 }
 
-export const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = ({ 
-  children, 
+export const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = ({
+  children,
   staggerDelay = 0.1,
   initialDelay = 0,
   direction,
-  distance = 20
+  distance = 20,
 }) => {
-  // Get the directional properties based on the direction prop
   const getDirectionalProps = () => {
     if (!direction) return {};
-    
+
     switch (direction) {
       case 'up':
         return { y: distance };
@@ -34,52 +33,42 @@ export const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = ({
     }
   };
 
-  // Create variants for the container and items
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: staggerDelay,
-        delayChildren: initialDelay
-      }
-    }
+        delayChildren: initialDelay,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
-      ...getDirectionalProps()
+      ...getDirectionalProps(),
     },
-    show: { 
+    show: {
       opacity: 1,
       x: 0,
       y: 0,
       transition: {
         type: 'spring',
         stiffness: 260,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
-  // Clone the children and wrap each child in a motion.div
   const staggeredChildren = React.Children.map(children, (child) => {
     if (!React.isValidElement(child)) return child;
-    
-    return (
-      <motion.div variants={itemVariants}>
-        {child}
-      </motion.div>
-    );
+
+    return <motion.div variants={itemVariants}>{child}</motion.div>;
   });
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="show">
       {staggeredChildren}
     </motion.div>
   );

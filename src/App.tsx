@@ -2,21 +2,23 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { Routes, Route } from 'react-router-dom';
+
 import { theme } from './theme/theme';
 import { AppLayout } from './components/common/AppLayout';
 import { PracticeProvider } from './store/PracticeContext';
-import { Routes, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard';
-import  { ManagePractices}  from './pages/ManagePractices';
-import  Users  from './pages/ManageUsers';
-import  Patients  from './pages/ManagePatients';
+import { ManagePractices } from './pages/ManagePractices';
+import Users from './pages/ManageUsers';
+import Patients from './pages/ManagePatients';
 import { MyProfile } from './pages/MyProfile';
 import Logs from './pages/Logs';
 
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>z
+      <ThemeProvider theme={theme}>
+        z
         <CssBaseline />
         <PracticeProvider>
           <AppLayout>

@@ -9,16 +9,16 @@ interface FadeInProps {
   distance?: number;
 }
 
-export const FadeIn: React.FC<FadeInProps> = ({ 
-  children, 
-  delay = 0, 
+export const FadeIn: React.FC<FadeInProps> = ({
+  children,
+  delay = 0,
   duration = 0.5,
   direction,
-  distance = 20
+  distance = 20,
 }) => {
   const getDirectionalProps = () => {
     if (!direction) return {};
-    
+
     switch (direction) {
       case 'up':
         return { y: distance };
@@ -35,19 +35,19 @@ export const FadeIn: React.FC<FadeInProps> = ({
 
   return (
     <motion.div
-      initial={{ 
+      initial={{
         opacity: 0,
-        ...getDirectionalProps()
+        ...getDirectionalProps(),
       }}
-      animate={{ 
+      animate={{
         opacity: 1,
         x: 0,
-        y: 0
+        y: 0,
       }}
-      transition={{ 
-        delay, 
+      transition={{
+        delay,
         duration,
-        ease: "easeOut"
+        ease: 'easeOut',
       }}
     >
       {children}

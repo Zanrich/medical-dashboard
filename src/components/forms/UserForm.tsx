@@ -1,13 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import {
-  Box,
-  Grid,
-  TextField,
-  MenuItem,
-  FormControl,
-  FormHelperText,
-} from '@mui/material';
+import { Box, Grid, TextField, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { UserSchema } from './ValidationSchemas';
 
@@ -129,11 +122,7 @@ export const UserForm: React.FC<UserFormProps> = ({
             </Grid>
             <Grid item xs={12}>
               <Box display="flex" justifyContent="flex-end">
-                <LoadingButton
-                  type="submit"
-                  variant="contained"
-                  loading={isSubmitting}
-                >
+                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                   Save User
                 </LoadingButton>
               </Box>

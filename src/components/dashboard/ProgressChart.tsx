@@ -31,7 +31,6 @@ const ProcessItem: React.FC<ProcessItemProps> = ({ label, value, color }) => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        // width: '229px'
         gap: 5,
         [theme.breakpoints.down('md')]: {
           justifyContent: 'flex-start',
@@ -68,7 +67,7 @@ const ProcessItem: React.FC<ProcessItemProps> = ({ label, value, color }) => {
         />
         <Typography
           variant="caption"
-          color='notifications.header'
+          color="notifications.header"
           sx={{
             position: 'absolute',
             fontSize: '14px',
@@ -79,36 +78,36 @@ const ProcessItem: React.FC<ProcessItemProps> = ({ label, value, color }) => {
           {`${value}%`}
         </Typography>
       </Box>
-      <Box sx={{width: '110px'}}>
+      <Box sx={{ width: '110px' }}>
         <Typography
-            variant="body2"
-            sx={{
-              color: 'notifications.header',
-              fontSize: '24px',
-              fontWeight: 700,
-              fontHeight: '36px',
-            }}
-          >
-           {`${value}%`}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              pt: 0.5,
-              color: 'notifications.subheader',
-              fontSize: '14px',
-              lineHeight: '22px',
-            }}
-          >
-            {label}
-          </Typography>
+          variant="body2"
+          sx={{
+            color: 'notifications.header',
+            fontSize: '24px',
+            fontWeight: 700,
+            fontHeight: '36px',
+          }}
+        >
+          {`${value}%`}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            pt: 0.5,
+            color: 'notifications.subheader',
+            fontSize: '14px',
+            lineHeight: '22px',
+          }}
+        >
+          {label}
+        </Typography>
       </Box>
     </Box>
   );
 };
 
 export const ProcessChart: React.FC = () => {
-     const theme = useTheme();
+  const theme = useTheme();
   const processes = [
     { label: 'Pending', value: 24, color: '#FF966B' },
     { label: 'Registered', value: 56, color: '#54D62C' },
@@ -124,71 +123,36 @@ export const ProcessChart: React.FC = () => {
         py: 4.75,
         px: 3,
         mt: 3.25,
-        // gap: 4,
         width: '100%',
         bgcolor: 'background.paper',
         borderRadius: 4,
         boxShadow: '0px 12px 24px -4px #919EAB1F',
       }}
     >
-          <Grid 
-            container 
-            spacing={3} 
-            sx={{
-              // display: 'flex',
-              // justifyContent: 'space-around',
-              // alignItems: 'center',
-              // p: 3,
-              // // gap: 4,
-              // width: '100%',
-              // bgcolor: 'background.paper',
-              // borderRadius: 4,
-              // boxShadow: '0px 12px 24px -4px #919EAB1F',
-              '& .MuiGrid-item': {
-              width: '100%',
-              [theme.breakpoints.down('md')]: {
-                maxWidth: '100%',
-                flexBasis: '100%',
-              },
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          '& .MuiGrid-item': {
+            width: '100%',
+            [theme.breakpoints.down('md')]: {
+              maxWidth: '100%',
+              flexBasis: '100%',
+            },
           },
-            }}>
-              {processes.map((process, index) => (
-                <Grid item xs={12} md={4} key={index}>
-                  <ProcessItem
-                    key={index}
-                    label={process.label}
-                    value={process.value}
-                    color={process.color}
-                  />
-              </Grid>
-            ))}
+        }}
+      >
+        {processes.map((process, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <ProcessItem
+              key={index}
+              label={process.label}
+              value={process.value}
+              color={process.color}
+            />
           </Grid>
-          </Box>
-          //   <Grid item xs={12}>
-          //     <ProcessChart  />
-          //   </Grid>
-          // </Grid>
-    // <Box
-    //   sx={{
-    //     display: 'flex',
-    //     justifyContent: 'space-around',
-    //     alignItems: 'center',
-    //     p: 3,
-    //     gap: 4,
-    //     width: '100%',
-    //     bgcolor: 'background.paper',
-    //     borderRadius: 4,
-    //     boxShadow: '0px 12px 24px -4px #919EAB1F',
-    //   }}
-    // >
-      // {processes.map((process, index) => (
-      //   <ProcessItem
-      //     key={index}
-      //     label={process.label}
-      //     value={process.value}
-      //     color={process.color}
-      //   />
-      // ))}
-    // </Box>
+        ))}
+      </Grid>
+    </Box>
   );
 };

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactElement } from 'react';
+
 import { authApi } from '../services/api';
 
 interface AuthState {
@@ -42,7 +43,9 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   }
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }): ReactElement => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}): ReactElement => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {

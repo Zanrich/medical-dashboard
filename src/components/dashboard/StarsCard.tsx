@@ -32,34 +32,28 @@ const IncreaseIndicator = styled(Box)(({ theme }) => ({
     width: 16,
     height: 16,
     color: '#54D62C',
-    
   },
 }));
 
 const IconContainer = styled(Box)(({ theme }) => ({
-  width: '56px', // Force exact width
-  height: '56px', // Force exact height
-  minWidth: '56px', // Prevent shrinking
-  minHeight: '56px', // Prevent shrinking
+  width: '56px',
+  height: '56px',
+  minWidth: '56px',
+  minHeight: '56px',
   borderRadius: '50%',
   backgroundColor: '#E4F7F9',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   alignSelf: 'center',
-  flexShrink: 0, // Prevent shrinking
+  flexShrink: 0,
   '& img': {
     width: 32,
     height: 32,
   },
 }));
 
-export const StatsCard: React.FC<StatsCardProps> = ({
-  title,
-  value,
-  increase,
-  icon,
-}) => {
+export const StatsCard: React.FC<StatsCardProps> = ({ title, value, increase, icon }) => {
   return (
     <StyledCard>
       <Box
@@ -69,10 +63,10 @@ export const StatsCard: React.FC<StatsCardProps> = ({
           alignItems: 'flex-start',
         }}
       >
-        <Box sx={{mr: 2}}>
+        <Box sx={{ mr: 2 }}>
           <Typography
             variant="subtitle1"
-            color='notifications.header'
+            color="notifications.header"
             sx={{
               fontSize: '14px',
               fontWeight: 600,
@@ -83,16 +77,24 @@ export const StatsCard: React.FC<StatsCardProps> = ({
             {title}
           </Typography>
 
-          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', mb: 0.5 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              mb: 0.5,
+            }}
+          >
             <IncreaseIndicator>
               <TrendingUp />
             </IncreaseIndicator>
             <Typography
-            color='notifications.header'
+              color="notifications.header"
               sx={{
                 fontSize: '14px',
                 fontWeight: 600,
-                lineHeight: '22px'
+                lineHeight: '22px',
               }}
             >
               {increase}
@@ -101,7 +103,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 
           <Typography
             variant="h3"
-            color='notifications.header'
+            color="notifications.header"
             sx={{
               fontSize: '32px',
               fontWeight: 700,
@@ -111,9 +113,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
             {value}
           </Typography>
         </Box>
-        <IconContainer>
-          {icon}
-        </IconContainer>
+        <IconContainer>{icon}</IconContainer>
       </Box>
     </StyledCard>
   );

@@ -15,7 +15,6 @@ import {
   InputAdornment,
   Button,
   Grid,
-  Card,
   CardContent,
   IconButton,
   Avatar,
@@ -30,7 +29,6 @@ import {
   Add,
   Edit,
   Delete,
-  Person,
   Security,
   Work,
   Email,
@@ -40,6 +38,7 @@ import {
   Block,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
+
 import { PageTransition } from '../components/animations/PageTransition';
 import { FadeIn } from '../components/animations/FadeIn';
 import { StaggeredFadeIn } from '../components/animations/StaggeredFadeIn';
@@ -72,28 +71,30 @@ const StatusChip = styled(Chip)<{ status: 'active' | 'inactive' }>(({ theme, sta
   }),
 }));
 
-const RoleChip = styled(Chip)<{ role: 'admin' | 'doctor' | 'receptionist' | 'nurse' }>(({ theme, role }) => ({
-  borderRadius: 16,
-  height: 24,
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  ...(role === 'admin' && {
-    backgroundColor: '#D0F2FF',
-    color: '#1890FF',
-  }),
-  ...(role === 'doctor' && {
-    backgroundColor: '#FFF7CD',
-    color: '#FFC107',
-  }),
-  ...(role === 'receptionist' && {
-    backgroundColor: '#FFE7D9',
-    color: '#FF4842',
-  }),
-  ...(role === 'nurse' && {
-    backgroundColor: '#E4F7F9',
-    color: '#67ADB9',
-  }),
-}));
+const RoleChip = styled(Chip)<{ role: 'admin' | 'doctor' | 'receptionist' | 'nurse' }>(
+  ({ theme, role }) => ({
+    borderRadius: 16,
+    height: 24,
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    ...(role === 'admin' && {
+      backgroundColor: '#D0F2FF',
+      color: '#1890FF',
+    }),
+    ...(role === 'doctor' && {
+      backgroundColor: '#FFF7CD',
+      color: '#FFC107',
+    }),
+    ...(role === 'receptionist' && {
+      backgroundColor: '#FFE7D9',
+      color: '#FF4842',
+    }),
+    ...(role === 'nurse' && {
+      backgroundColor: '#E4F7F9',
+      color: '#67ADB9',
+    }),
+  })
+);
 
 const UserCard = styled(motion.div)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -126,12 +127,45 @@ const Users: React.FC = () => {
 
   // Mock data
   const generateUsers = (): User[] => {
-    const firstNames = ['John', 'Emma', 'Michael', 'Olivia', 'William', 'Sophia', 'James', 'Ava', 'Benjamin', 'Isabella'];
-    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson'];
-    const practices = ['Cape Fertility Clinic', 'Sunshine Medical Center', 'Oceanview Healthcare', 'Mountain View Hospital'];
-    const roles: ('admin' | 'doctor' | 'receptionist' | 'nurse')[] = ['admin', 'doctor', 'doctor', 'receptionist', 'nurse'];
+    const firstNames = [
+      'John',
+      'Emma',
+      'Michael',
+      'Olivia',
+      'William',
+      'Sophia',
+      'James',
+      'Ava',
+      'Benjamin',
+      'Isabella',
+    ];
+    const lastNames = [
+      'Smith',
+      'Johnson',
+      'Williams',
+      'Brown',
+      'Jones',
+      'Miller',
+      'Davis',
+      'Garcia',
+      'Rodriguez',
+      'Wilson',
+    ];
+    const practices = [
+      'Cape Fertility Clinic',
+      'Sunshine Medical Center',
+      'Oceanview Healthcare',
+      'Mountain View Hospital',
+    ];
+    const roles: ('admin' | 'doctor' | 'receptionist' | 'nurse')[] = [
+      'admin',
+      'doctor',
+      'doctor',
+      'receptionist',
+      'nurse',
+    ];
     const statuses: ('active' | 'inactive')[] = ['active', 'active', 'active', 'inactive'];
-    
+
     return Array.from({ length: 30 }, (_, i) => {
       const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
       const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
@@ -139,15 +173,13 @@ const Users: React.FC = () => {
       const role = roles[Math.floor(Math.random() * roles.length)];
       const status = statuses[Math.floor(Math.random() * statuses.length)];
       const practice = practices[Math.floor(Math.random() * practices.length)];
-      
-      // Generate a random date within the last 30 days for last login
+
       const lastLoginDate = new Date();
       lastLoginDate.setDate(lastLoginDate.getDate() - Math.floor(Math.random() * 30));
-      
-      // Generate a random date within the last year for creation date
+
       const creationDate = new Date();
       creationDate.setDate(creationDate.getDate() - Math.floor(Math.random() * 365));
-      
+
       return {
         id: `USR-${1000 + i}`,
         name,
@@ -165,17 +197,16 @@ const Users: React.FC = () => {
 
   const users = generateUsers();
 
-  // Filter users based on search term, role filter, and status filter
   const filteredUsers = users.filter((user) => {
-    const matchesSearch = 
+    const matchesSearch =
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.id.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
     const matchesInactive = showInactive || user.status === 'active';
-    
+
     return matchesSearch && matchesRole && matchesStatus && matchesInactive;
   });
 
@@ -192,7 +223,9 @@ const Users: React.FC = () => {
     <PageTransition>
       <Box sx={{ p: 3 }}>
         <FadeIn duration={0.6}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
+          >
             <Typography variant="h4" sx={{ fontWeight: 700 }}>
               Users
             </Typography>
@@ -318,14 +351,14 @@ const Users: React.FC = () => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.05 * index, duration: 0.3 }}
-                          style={{ 
+                          style={{
                             borderBottom: '1px solid rgba(224, 224, 224, 1)',
                           }}
                         >
                           <TableCell>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                              <Avatar 
-                                src={user.avatar} 
+                              <Avatar
+                                src={user.avatar}
                                 alt={user.name}
                                 sx={{ mr: 2, width: 32, height: 32 }}
                               />
@@ -350,7 +383,13 @@ const Users: React.FC = () => {
                           <TableCell>{user.lastLogin}</TableCell>
                           <TableCell>
                             <StatusChip
-                              icon={user.status === 'active' ? <VerifiedUser fontSize="small" /> : <Block fontSize="small" />}
+                              icon={
+                                user.status === 'active' ? (
+                                  <VerifiedUser fontSize="small" />
+                                ) : (
+                                  <Block fontSize="small" />
+                                )
+                              }
                               label={user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                               status={user.status}
                             />
@@ -401,12 +440,7 @@ const Users: React.FC = () => {
             </Paper>
           </FadeIn>
         ) : (
-          <StaggeredFadeIn
-            staggerDelay={0.1}
-            initialDelay={0.4}
-            direction="up"
-            distance={20}
-          >
+          <StaggeredFadeIn staggerDelay={0.1} initialDelay={0.4} direction="up" distance={20}>
             <Grid container spacing={3}>
               {filteredUsers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -418,8 +452,8 @@ const Users: React.FC = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <Box sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
-                        <Avatar 
-                          src={user.avatar} 
+                        <Avatar
+                          src={user.avatar}
                           alt={user.name}
                           sx={{ width: 48, height: 48, mr: 2 }}
                         />
@@ -464,7 +498,14 @@ const Users: React.FC = () => {
                           <Typography variant="body2">Last login: {user.lastLogin}</Typography>
                         </InfoItem>
                       </CardContent>
-                      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                      <Box
+                        sx={{
+                          p: 2,
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+                        }}
+                      >
                         <Button
                           component={motion.button}
                           whileHover={{ scale: 1.05 }}
@@ -492,7 +533,7 @@ const Users: React.FC = () => {
             </Grid>
           </StaggeredFadeIn>
         )}
-        
+
         <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

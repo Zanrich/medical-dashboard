@@ -9,9 +9,7 @@ import {
   TableRow,
   Paper,
   Typography,
-  Chip,
   IconButton,
-  Link,
   styled,
   Menu,
   MenuItem,
@@ -22,15 +20,14 @@ import {
   Button,
   useMediaQuery,
   Theme,
-  Switch 
+  Switch,
 } from '@mui/material';
-// import EditIcon from '@mui/icons-material/Edit';
-import EditIcon from '../../assets/icons/edit.png';
-// import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteIcon from '../../assets/icons/trash.png';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import EditIcon from '../../assets/icons/edit.png';
+import DeleteIcon from '../../assets/icons/trash.png';
 
 interface Practice {
   name: string;
@@ -42,10 +39,9 @@ interface Practice {
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
-  // boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)',
 }));
 
-const StatusSwitch = styled(Switch)(({ theme }) => ({
+const StatusSwitch = styled(Switch)(() => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: '#67ADB9',
   },
@@ -53,29 +49,14 @@ const StatusSwitch = styled(Switch)(({ theme }) => ({
     backgroundColor: '#67ADB952',
   },
   '& .MuiSwitch-track': {
-    backgroundColor:'#9D9D9D',
+    backgroundColor: '#9D9D9D',
   },
   '& .MuiSwitch-switchBase': {
-    color:'#F5F5F5',
+    color: '#F5F5F5',
   },
 }));
 
-const StatusChip = styled(Chip)<{ status: 'active' | 'disabled' }>(({ theme, status }) => ({
-  borderRadius: 16,
-  height: 24,
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  ...(status === 'active' && {
-    backgroundColor: '#E4F7F9',
-    color: '#67ADB9',
-  }),
-  ...(status === 'disabled' && {
-    backgroundColor: theme.palette.grey[200],
-    color: theme.palette.grey[600],
-  }),
-}));
-
-const ActionButton = styled(IconButton)(({ theme }) => ({
+const ActionButton = styled(IconButton)(() => ({
   padding: 6,
   '& svg': {
     fontSize: '1.25rem',
@@ -105,7 +86,6 @@ export const PracticesTable: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<Practice | null>(null);
-
   const isLargeScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
   const practices: Practice[] = [
@@ -151,55 +131,114 @@ export const PracticesTable: React.FC = () => {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden', borderRadius: 4,  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)', }}>
+    <Paper
+      sx={{
+        width: '100%',
+        overflow: 'hidden',
+        borderRadius: 4,
+        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)',
+      }}
+    >
       <Box sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '18px', lineHeight: '28px' }}>
           Newest Practices
         </Typography>
       </Box>
       <StyledTableContainer sx={{ maxWidth: '100%' }}>
-      <Table sx={{ width: '100%', fontSize: '14px' }}>
+        <Table sx={{ width: '100%', fontSize: '14px' }}>
           <TableHead>
             <TableRow sx={{ display: 'flex', mx: 1, backgroundColor: 'grey.100', borderRadius: 4 }}>
-              <TableCell sx={{ color: 'notifications.subheader', flex: 1, fontWeight: 600, borderBottom: 0 }}>Practice Name</TableCell>
+              <TableCell
+                sx={{ color: 'notifications.subheader', flex: 1, fontWeight: 600, borderBottom: 0 }}
+              >
+                Practice Name
+              </TableCell>
               {isLargeScreen && (
                 <>
-                  <TableCell sx={{ color: 'notifications.subheader',  flex: 1 , fontWeight: 600, borderBottom: 0}}>Tel No</TableCell>
-                  <TableCell sx={{ color: 'notifications.subheader',  flex: 1, fontWeight: 600, borderBottom: 0}}>Email</TableCell>
-                  <TableCell sx={{ color: 'notifications.subheader',  flex: 1, fontWeight: 600, borderBottom: 0 }}>Date Created</TableCell>
-                  <TableCell sx={{ color: 'notifications.subheader',  flex: 1, fontWeight: 600, borderBottom: 0 }}>Status</TableCell>
+                  <TableCell
+                    sx={{
+                      color: 'notifications.subheader',
+                      flex: 1,
+                      fontWeight: 600,
+                      borderBottom: 0,
+                    }}
+                  >
+                    Tel No
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      color: 'notifications.subheader',
+                      flex: 1,
+                      fontWeight: 600,
+                      borderBottom: 0,
+                    }}
+                  >
+                    Email
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      color: 'notifications.subheader',
+                      flex: 1,
+                      fontWeight: 600,
+                      borderBottom: 0,
+                    }}
+                  >
+                    Date Created
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      color: 'notifications.subheader',
+                      flex: 1,
+                      fontWeight: 600,
+                      borderBottom: 0,
+                    }}
+                  >
+                    Status
+                  </TableCell>
                 </>
               )}
-              <TableCell align="right" sx={{ fontWeight: 600, color: 'notifications.subheader', borderBottom: 0}}>Actions</TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontWeight: 600, color: 'notifications.subheader', borderBottom: 0 }}
+              >
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {practices.map((practice, index) => (
-              <TableRow
-                key={index}
-                sx={{ display: 'flex', mx: 1}}
-              >
-                <TableCell component="th" scope="row" sx={{ color: 'notifications.header', flex: 1, borderBottom: 0  }}>
+              <TableRow key={index} sx={{ display: 'flex', mx: 1 }}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  sx={{ color: 'notifications.header', flex: 1, borderBottom: 0 }}
+                >
                   {practice.name}
                 </TableCell>
                 {isLargeScreen && (
                   <>
-                    <TableCell sx={{ color: 'notifications.header',  flex: 1, borderBottom: 0  }}>{practice.tel}</TableCell>
-                    <TableCell sx={{ color: 'notifications.header',  flex: 1, borderBottom: 0 }}>{practice.email}</TableCell>
-                    <TableCell sx={{ color: 'notifications.header',  flex: 1, borderBottom: 0  }}>{practice.dateCreated}</TableCell>
-                    <TableCell sx={{ color: 'notifications.header',  flex: 1, borderBottom: 0  }}>
+                    <TableCell sx={{ color: 'notifications.header', flex: 1, borderBottom: 0 }}>
+                      {practice.tel}
+                    </TableCell>
+                    <TableCell sx={{ color: 'notifications.header', flex: 1, borderBottom: 0 }}>
+                      {practice.email}
+                    </TableCell>
+                    <TableCell sx={{ color: 'notifications.header', flex: 1, borderBottom: 0 }}>
+                      {practice.dateCreated}
+                    </TableCell>
+                    <TableCell sx={{ color: 'notifications.header', flex: 1, borderBottom: 0 }}>
                       <StyledStatusCell status={practice.status} />
                     </TableCell>
                   </>
                 )}
-                <TableCell align="right" sx={{borderBottom: 0}} >
+                <TableCell align="right" sx={{ borderBottom: 0 }}>
                   {isLargeScreen ? (
                     <>
                       <ActionButton size="small">
-                        <img width={20} src={EditIcon} alt="Edit"/>
+                        <img width={20} src={EditIcon} alt="Edit" />
                       </ActionButton>
                       <ActionButton size="small">
-                        <img width={20} src={DeleteIcon} alt="Delete"/>
+                        <img width={20} src={DeleteIcon} alt="Delete" />
                       </ActionButton>
                     </>
                   ) : (
@@ -214,8 +253,26 @@ export const PracticesTable: React.FC = () => {
                         onClose={handleClose}
                       >
                         <MenuItem onClick={handleViewMore}>View More</MenuItem>
-                        <MenuItem>  <img width={16} src={EditIcon} style={{marginRight: '5px'}} alt="Edit"/> Edit</MenuItem>
-                        <MenuItem>  <img width={16} src={DeleteIcon} style={{marginRight: '5px'}} alt="Delete"/> Delete</MenuItem>
+                        <MenuItem>
+                          {' '}
+                          <img
+                            width={16}
+                            src={EditIcon}
+                            style={{ marginRight: '5px' }}
+                            alt="Edit"
+                          />{' '}
+                          Edit
+                        </MenuItem>
+                        <MenuItem>
+                          {' '}
+                          <img
+                            width={16}
+                            src={DeleteIcon}
+                            style={{ marginRight: '5px' }}
+                            alt="Delete"
+                          />{' '}
+                          Delete
+                        </MenuItem>
                       </Menu>
                     </>
                   )}
@@ -225,7 +282,17 @@ export const PracticesTable: React.FC = () => {
           </TableBody>
         </Table>
       </StyledTableContainer>
-      <Box onClick={() => navigate("/practices")} sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderTop: 1, borderColor:' #9D9D9D3D'  }}>
+      <Box
+        onClick={() => navigate('/practices')}
+        sx={{
+          p: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          borderTop: 1,
+          borderColor: ' #9D9D9D3D',
+        }}
+      >
         <Typography
           sx={{
             color: '#5F97A0',
@@ -236,21 +303,29 @@ export const PracticesTable: React.FC = () => {
         >
           See All
         </Typography>
-        <KeyboardArrowRightIcon sx={{width: 18, height: 18, ml: 1, color: '#5F97A0'}}/>
+        <KeyboardArrowRightIcon sx={{ width: 18, height: 18, ml: 1, color: '#5F97A0' }} />
       </Box>
-      
+
       <Dialog open={modalOpen} onClose={handleCloseModal}>
-        <DialogTitle>
-          Practice Details
-        </DialogTitle>
+        <DialogTitle>Practice Details</DialogTitle>
         <DialogContent>
           {selectedPractice && (
             <>
-              <Typography><strong>Name:</strong> {selectedPractice.name}</Typography>
-              <Typography><strong>Tel:</strong> {selectedPractice.tel}</Typography>
-              <Typography><strong>Email:</strong> {selectedPractice.email}</Typography>
-              <Typography><strong>Date Created:</strong> {selectedPractice.dateCreated}</Typography>
-              <Typography><strong>Status:</strong> {selectedPractice.status}</Typography>
+              <Typography>
+                <strong>Name:</strong> {selectedPractice.name}
+              </Typography>
+              <Typography>
+                <strong>Tel:</strong> {selectedPractice.tel}
+              </Typography>
+              <Typography>
+                <strong>Email:</strong> {selectedPractice.email}
+              </Typography>
+              <Typography>
+                <strong>Date Created:</strong> {selectedPractice.dateCreated}
+              </Typography>
+              <Typography>
+                <strong>Status:</strong> {selectedPractice.status}
+              </Typography>
             </>
           )}
         </DialogContent>

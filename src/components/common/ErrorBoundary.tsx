@@ -43,11 +43,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <Typography color="textSecondary" paragraph>
             We're sorry for the inconvenience. Please try refreshing the page.
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => window.location.reload()}
-          >
+          <Button variant="contained" color="primary" onClick={() => window.location.reload()}>
             Refresh Page
           </Button>
         </Box>

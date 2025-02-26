@@ -15,7 +15,6 @@ import {
   InputAdornment,
   Button,
   Grid,
-  Card,
   CardContent,
   IconButton,
   Avatar,
@@ -29,18 +28,17 @@ import {
   Search,
   Add,
   Edit,
-  Delete,
-  FilterList,
-  Person,
   CalendarToday,
   Phone,
   Email,
   MedicalServices,
   Assignment,
   ArrowForward,
-  Business, Event,
+  Business,
+  Event,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
+
 import { PageTransition } from '../components/animations/PageTransition';
 import { FadeIn } from '../components/animations/FadeIn';
 import { StaggeredFadeIn } from '../components/animations/StaggeredFadeIn';
@@ -61,24 +59,26 @@ interface Patient {
   treatmentsCount: number;
 }
 
-const StatusChip = styled(Chip)<{ status: 'active' | 'pending' | 'inactive' }>(({ theme, status }) => ({
-  borderRadius: 16,
-  height: 24,
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  ...(status === 'active' && {
-    backgroundColor: '#E9FCD4',
-    color: '#54D62C',
-  }),
-  ...(status === 'pending' && {
-    backgroundColor: '#FFF7CD',
-    color: '#FFC107',
-  }),
-  ...(status === 'inactive' && {
-    backgroundColor: theme.palette.grey[200],
-    color: theme.palette.grey[600],
-  }),
-}));
+const StatusChip = styled(Chip)<{ status: 'active' | 'pending' | 'inactive' }>(
+  ({ theme, status }) => ({
+    borderRadius: 16,
+    height: 24,
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    ...(status === 'active' && {
+      backgroundColor: '#E9FCD4',
+      color: '#54D62C',
+    }),
+    ...(status === 'pending' && {
+      backgroundColor: '#FFF7CD',
+      color: '#FFC107',
+    }),
+    ...(status === 'inactive' && {
+      backgroundColor: theme.palette.grey[200],
+      color: theme.palette.grey[600],
+    }),
+  })
+);
 
 const PatientCard = styled(motion.div)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -108,25 +108,54 @@ const Patients: React.FC = () => {
   const [tabValue, setTabValue] = useState(0);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
-  // Mock data
   const generatePatients = (): Patient[] => {
-    const firstNames = ['John', 'Emma', 'Michael', 'Olivia', 'William', 'Sophia', 'James', 'Ava', 'Benjamin', 'Isabella'];
-    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson'];
-    const practices = ['Cape Fertility Clinic', 'Sunshine Medical Center', 'Oceanview Healthcare', 'Mountain View Hospital'];
-    const statuses: ('active' | 'pending' | 'inactive')[] = ['active', 'active', 'pending', 'inactive'];
-    
+    const firstNames = [
+      'John',
+      'Emma',
+      'Michael',
+      'Olivia',
+      'William',
+      'Sophia',
+      'James',
+      'Ava',
+      'Benjamin',
+      'Isabella',
+    ];
+    const lastNames = [
+      'Smith',
+      'Johnson',
+      'Williams',
+      'Brown',
+      'Jones',
+      'Miller',
+      'Davis',
+      'Garcia',
+      'Rodriguez',
+      'Wilson',
+    ];
+    const practices = [
+      'Cape Fertility Clinic',
+      'Sunshine Medical Center',
+      'Oceanview Healthcare',
+      'Mountain View Hospital',
+    ];
+    const statuses: ('active' | 'pending' | 'inactive')[] = [
+      'active',
+      'active',
+      'pending',
+      'inactive',
+    ];
+
     return Array.from({ length: 50 }, (_, i) => {
       const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
       const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
       const name = `${firstName} ${lastName}`;
       const status = statuses[Math.floor(Math.random() * statuses.length)];
       const practice = practices[Math.floor(Math.random() * practices.length)];
-      
-      // Generate a random date within the last 30 days for last visit
+
       const lastVisitDate = new Date();
       lastVisitDate.setDate(lastVisitDate.getDate() - Math.floor(Math.random() * 30));
-      
-      // 70% chance of having an upcoming appointment
+
       const hasUpcomingAppointment = Math.random() < 0.7;
       let upcomingAppointment = null;
       if (hasUpcomingAppointment) {
@@ -134,7 +163,7 @@ const Patients: React.FC = () => {
         appointmentDate.setDate(appointmentDate.getDate() + Math.floor(Math.random() * 14) + 1);
         upcomingAppointment = appointmentDate.toLocaleDateString();
       }
-      
+
       return {
         id: `PAT-${10000 + i}`,
         name,
@@ -155,21 +184,20 @@ const Patients: React.FC = () => {
 
   const patients = generatePatients();
 
-  // Filter patients based on search term, status filter, and tab
   const filteredPatients = patients.filter((patient) => {
-    const matchesSearch = 
+    const matchesSearch =
       patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       patient.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       patient.id.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesStatus = statusFilter === 'all' || patient.status === statusFilter;
-    
-    // Tab 0: All, Tab 1: With Upcoming Appointments, Tab 2: Recent Visits
-    const matchesTab = 
-      tabValue === 0 || 
+
+    const matchesTab =
+      tabValue === 0 ||
       (tabValue === 1 && patient.upcomingAppointment !== null) ||
-      (tabValue === 2 && new Date(patient.lastVisit).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000);
-    
+      (tabValue === 2 &&
+        new Date(patient.lastVisit).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000);
+
     return matchesSearch && matchesStatus && matchesTab;
   });
 
@@ -191,7 +219,9 @@ const Patients: React.FC = () => {
     <PageTransition>
       <Box sx={{ p: 3 }}>
         <FadeIn duration={0.6}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
+          >
             <Typography variant="h4" sx={{ fontWeight: 700 }}>
               Patients
             </Typography>
@@ -303,14 +333,14 @@ const Patients: React.FC = () => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.05 * index, duration: 0.3 }}
-                          style={{ 
+                          style={{
                             borderBottom: '1px solid rgba(224, 224, 224, 1)',
                           }}
                         >
                           <TableCell>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                              <Avatar 
-                                src={patient.avatar} 
+                              <Avatar
+                                src={patient.avatar}
                                 alt={patient.name}
                                 sx={{ mr: 2, width: 32, height: 32 }}
                               />
@@ -327,12 +357,12 @@ const Patients: React.FC = () => {
                           <TableCell>{patient.id}</TableCell>
                           <TableCell>{patient.practice}</TableCell>
                           <TableCell>{patient.lastVisit}</TableCell>
-                          <TableCell>
-                            {patient.upcomingAppointment || 'None scheduled'}
-                          </TableCell>
+                          <TableCell>{patient.upcomingAppointment || 'None scheduled'}</TableCell>
                           <TableCell>
                             <StatusChip
-                              label={patient.status.charAt(0).toUpperCase() + patient.status.slice(1)}
+                              label={
+                                patient.status.charAt(0).toUpperCase() + patient.status.slice(1)
+                              }
                               status={patient.status}
                             />
                           </TableCell>
@@ -382,12 +412,7 @@ const Patients: React.FC = () => {
             </Paper>
           </FadeIn>
         ) : (
-          <StaggeredFadeIn
-            staggerDelay={0.1}
-            initialDelay={0.4}
-            direction="up"
-            distance={20}
-          >
+          <StaggeredFadeIn staggerDelay={0.1} initialDelay={0.4} direction="up" distance={20}>
             <Grid container spacing={3}>
               {filteredPatients
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -399,8 +424,8 @@ const Patients: React.FC = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <Box sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
-                        <Avatar 
-                          src={patient.avatar} 
+                        <Avatar
+                          src={patient.avatar}
                           alt={patient.name}
                           sx={{ width: 48, height: 48, mr: 2 }}
                         />
@@ -450,7 +475,14 @@ const Patients: React.FC = () => {
                           </Typography>
                         </InfoItem>
                       </CardContent>
-                      <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                      <Box
+                        sx={{
+                          p: 2,
+                          display: 'flex',
+                          justifyContent: 'flex-end',
+                          borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+                        }}
+                      >
                         <Button
                           component={motion.button}
                           whileHover={{ scale: 1.05 }}
@@ -479,7 +511,7 @@ const Patients: React.FC = () => {
             </Grid>
           </StaggeredFadeIn>
         )}
-        
+
         <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

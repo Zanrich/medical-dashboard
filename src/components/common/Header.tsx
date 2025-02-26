@@ -9,18 +9,16 @@ import {
   Menu,
   MenuItem,
   styled,
-  Button,
   Divider,
   Typography,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import { Notifications } from '@mui/icons-material';
-import { NotificationsPanel } from '../dashboard/NotificationsPanel';
-import { useLocation, useNavigate } from 'react-router-dom';
-import notificationIcon from '../../assets/icons/notification.png';
+import { useNavigate } from 'react-router-dom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import zIndex from '@mui/material/styles/zIndex';
+
+import notificationIcon from '../../assets/icons/notification.png';
+import { NotificationsPanel } from '../dashboard/NotificationsPanel';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -30,11 +28,11 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
   '& .MuiPaper-root': {
-    marginTop: theme.spacing(3), // Increased margin to prevent clipping
+    marginTop: theme.spacing(3),
     minWidth: 220,
     borderRadius: '12px',
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
-    overflow: 'visible', // Allow content to overflow for the triangle
+    overflow: 'visible',
     '&::before': {
       content: '""',
       position: 'absolute',
@@ -53,28 +51,22 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 }));
 const MenuHeader = styled(Box)(({ theme }) => ({
   paddingTop: theme.spacing(1),
-  paddingLeft: theme.spacing(2.5),  
+  paddingLeft: theme.spacing(2.5),
   paddingRight: theme.spacing(2.5),
   paddingBottom: theme.spacing(2),
 }));
 
 const MenuItems = styled(Box)(({ theme }) => ({
   paddingTop: theme.spacing(1),
-  // paddingBottom: theme.spacing(1),
 }));
 
 export const Header: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [notificationAnchorEl, setNotificationAnchorEl] = useState<HTMLElement | null>(null);
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const theme = useTheme();
-  const isLargeDown = useMediaQuery(theme.breakpoints.up('lg')); // Changed from 'md' to 'lg'
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const isLargeDown = useMediaQuery(theme.breakpoints.up('lg'));
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -90,7 +82,7 @@ export const Header: React.FC = () => {
 
   return (
     <StyledAppBar position="fixed">
-      <Toolbar sx={{px: 3.75}}>
+      <Toolbar sx={{ px: 3.75 }}>
         <Box sx={{ flexGrow: 1 }} />
         <IconButton
           color="primary"
@@ -100,8 +92,13 @@ export const Header: React.FC = () => {
             height: 44,
           }}
         >
-          <Badge badgeContent={2} color="error" >
-            <img width={20} src={notificationIcon} alt="NotificationIcon"  style={{ transition: 'filter 0.3s, transform 0.3s'}}/>
+          <Badge badgeContent={2} color="error">
+            <img
+              width={20}
+              src={notificationIcon}
+              alt="NotificationIcon"
+              style={{ transition: 'filter 0.3s, transform 0.3s' }}
+            />
           </Badge>
         </IconButton>
         <Box
@@ -111,33 +108,30 @@ export const Header: React.FC = () => {
             fkexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            height:40,
+            height: 40,
             marginLeft: 1.5,
           }}
         >
-          <Avatar sx={{width: 40, height: 40, bgcolor:'secondary.main' , color: 'primary.main', fontWeight: 600, fontSize: 14, lineHeight: 22}}>AS</Avatar>
+          <Avatar
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: 'secondary.main',
+              color: 'primary.main',
+              fontWeight: 600,
+              fontSize: 14,
+              lineHeight: 22,
+            }}
+          >
+            AS
+          </Avatar>
           {isLargeDown && (
             <>
-              <Typography sx={{ml: 1.5, fontWeight: 600, fontSize: 14}}>Adrian Stefan</Typography>
-              <KeyboardArrowDownIcon sx={{width: 16, height: 16, ml: 1.5, color: '#67ADB9'}}/>
+              <Typography sx={{ ml: 1.5, fontWeight: 600, fontSize: 14 }}>Adrian Stefan</Typography>
+              <KeyboardArrowDownIcon sx={{ width: 16, height: 16, ml: 1.5, color: '#67ADB9' }} />
             </>
-            )}
+          )}
         </Box>
-{/*     
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-        >
-          <Box>
-            <Typography sx={{px: 2, py: 1, fontWeight: 600, fontSize: 14}}>Adrian Stefan</Typography>
-            <Typography sx={{px: 2, py: 1, fontWeight: 400, fontSize: 14}}> demo@minimals.cc</Typography>
-          </Box>
-          <Divider/>
-          <MenuItem>Profile</MenuItem>
-          <Divider/>
-          <MenuItem>Logout</MenuItem>
-        </Menu> */}
         <StyledMenu
           anchorEl={anchorEl}
           open={open}
@@ -147,7 +141,7 @@ export const Header: React.FC = () => {
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
           <MenuHeader>
-            <Typography variant="subtitle1" color='notifications.header' sx={{ fontWeight: 600 }}>
+            <Typography variant="subtitle1" color="notifications.header" sx={{ fontWeight: 600 }}>
               Adrian Stefan
             </Typography>
             <Typography variant="body2" color="notifications.subheader">
@@ -156,19 +150,28 @@ export const Header: React.FC = () => {
           </MenuHeader>
           <Divider />
           <MenuItems>
-            <MenuItem sx={{ borderRadius: 1, mx: 1, py: 1, }} onClick={() => navigate('/profile')}>
-              <Typography variant="subtitle2" color='notifications.header' sx={{  ineHeight: '22px'}}>Profile</Typography>
+            <MenuItem sx={{ borderRadius: 1, mx: 1, py: 1 }} onClick={() => navigate('/profile')}>
+              <Typography
+                variant="subtitle2"
+                color="notifications.header"
+                sx={{ ineHeight: '22px' }}
+              >
+                Profile
+              </Typography>
             </MenuItem>
-            <Divider  sx={{m:0}}/>
-            <MenuItem sx={{ borderRadius: 1, mx: 1, py: 1}}>
-              <Typography variant="subtitle2" color='notifications.header' sx={{ lineHeight: '22px'}}>Logout</Typography>
+            <Divider sx={{ m: 0 }} />
+            <MenuItem sx={{ borderRadius: 1, mx: 1, py: 1 }}>
+              <Typography
+                variant="subtitle2"
+                color="notifications.header"
+                sx={{ lineHeight: '22px' }}
+              >
+                Logout
+              </Typography>
             </MenuItem>
           </MenuItems>
         </StyledMenu>
-        <NotificationsPanel
-          anchorEl={notificationAnchorEl}
-          onClose={handleNotificationClose}
-        />
+        <NotificationsPanel anchorEl={notificationAnchorEl} onClose={handleNotificationClose} />
       </Toolbar>
     </StyledAppBar>
   );

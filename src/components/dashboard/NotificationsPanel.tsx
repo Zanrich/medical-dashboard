@@ -1,93 +1,3 @@
-// import React from 'react';
-// import {
-//   Drawer,
-//   Box,
-//   Typography,
-//   List,
-//   ListItem,
-//   ListItemAvatar,
-//   ListItemText,
-//   Avatar,
-//   Button,
-//   IconButton,
-// } from '@mui/material';
-// import { Close } from '@mui/icons-material';
-// import { Notification } from '@/types';
-
-// interface NotificationsPanelProps {
-//   open: boolean;
-//   onClose: () => void;
-// }
-
-// export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
-//   open,
-//   onClose,
-// }) => {
-//   const notifications: Notification[] = [
-//     {
-//       id: '1',
-//       title: 'New Registration',
-//       user: {
-//         name: 'Alex Fredricks',
-//         avatar: '/path-to-avatar',
-//       },
-//       timestamp: '07 Oct 2022',
-//       read: false,
-//     },
-//     {
-//       id: '2',
-//       title: 'New Consent Added',
-//       user: {
-//         name: 'Blake Robertson',
-//         avatar: '/path-to-avatar',
-//       },
-//       timestamp: '07 Oct 2022',
-//       read: false,
-//     },
-//   ];
-
-//   return (
-//     <Drawer anchor="right" open={open} onClose={onClose}>
-//       <Box sx={{ width: 320, p: 2 }}>
-//         <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-//           <Typography variant="h6">Notifications</Typography>
-//           <IconButton onClick={onClose}>
-//             <Close />
-//           </IconButton>
-//         </Box>
-//         <Typography variant="subtitle2" color="textSecondary" mb={2}>
-//           You have {notifications.length} unread messages
-//         </Typography>
-//         <List>
-//           {notifications.map((notification) => (
-//             <ListItem key={notification.id} divider>
-//               <ListItemAvatar>
-//                 <Avatar src={notification.user.avatar}>{notification.user.name[0]}</Avatar>
-//               </ListItemAvatar>
-//               <ListItemText
-//                 primary={notification.title}
-//                 secondary={
-//                   <>
-//                     <Typography component="span" variant="body2">
-//                       {notification.user.name}
-//                     </Typography>
-//                     <br />
-//                     <Typography component="span" variant="caption" color="textSecondary">
-//                       {notification.timestamp}
-//                     </Typography>
-//                   </>
-//                 }
-//               />
-//             </ListItem>
-//           ))}
-//         </List>
-//         <Button fullWidth variant="text" sx={{ mt: 2 }}>
-//           Clear All
-//         </Button>
-//       </Box>
-//     </Drawer>
-//   );
-// };
 import React from 'react';
 import {
   Box,
@@ -97,14 +7,15 @@ import {
   styled,
   Popover,
   Button,
-  Divider
+  Divider,
 } from '@mui/material';
 import { Trash2, Clock3 } from 'lucide-react';
+
 import ProfilePicture from '../../assets/images/profilePicture.jpeg';
 
 const StyledPopover = styled(Popover)(({ theme }) => ({
   '& .MuiPaper-root': {
-    marginTop: theme.spacing(3), // Increased margin to prevent clipping
+    marginTop: theme.spacing(3),
     width: 360,
     borderRadius: '12px',
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
@@ -131,10 +42,7 @@ interface NotificationsPanelProps {
   onClose: () => void;
 }
 
-export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
-  anchorEl,
-  onClose,
-}) => {
+export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ anchorEl, onClose }) => {
   const open = Boolean(anchorEl);
 
   const notifications = [
@@ -172,15 +80,19 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
         horizontal: 'right',
       }}
     >
-      <Box sx={{  pt: 2 }}>
-        <Typography variant="subtitle1" color='notifications.header' sx={{ px: 2.5, fontWeight: 600 }}>
+      <Box sx={{ pt: 2 }}>
+        <Typography
+          variant="subtitle1"
+          color="notifications.header"
+          sx={{ px: 2.5, fontWeight: 600 }}
+        >
           Notifications
         </Typography>
-        <Typography variant="body2" color="notifications.subheader" sx={{ px: 2.5,  mb: 2 }}>
+        <Typography variant="body2" color="notifications.subheader" sx={{ px: 2.5, mb: 2 }}>
           You have 2 unread messages
         </Typography>
         <Divider />
-        <Box sx={{  mb: 0}}>
+        <Box sx={{ mb: 0 }}>
           {notifications.map((notification) => (
             <Box
               key={notification.id}
@@ -203,21 +115,26 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
                 sx={{ width: 40, height: 40, mr: 2 }}
               />
               <Box sx={{ flex: 1 }}>
-                <Typography variant="subtitle2"  color='notifications.header' sx={{ fontWeight: 600, lineHeight: '22px'}}>
+                <Typography
+                  variant="subtitle2"
+                  color="notifications.header"
+                  sx={{ fontWeight: 600, lineHeight: '22px' }}
+                >
                   {notification.type}
                 </Typography>
                 <Typography variant="body2" color="notifications.subheader" sx={{ mb: 0.5 }}>
                   {notification.user.name}
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-                  <Clock3 
-                    size={16} 
+                  <Clock3
+                    size={16}
                     color={'#BCBCBC'}
                     style={{
                       marginRight: '4px',
                       marginTop: '1px',
                       marginBottom: '1px',
-                    }}/>
+                    }}
+                  />
                   <Typography
                     variant="caption"
                     color="notifications.time"
@@ -225,7 +142,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
                       display: 'flex',
                       alignItems: 'center',
                       lineHeight: '18px',
-                      fontSize: '12px'
+                      fontSize: '12px',
                     }}
                   >
                     {notification.timestamp}
@@ -239,7 +156,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
                 }}
                 sx={{ color: 'text.secondary' }}
               >
-                <Trash2 size={20} color={"#BCBCBC"}/>
+                <Trash2 size={20} color={'#BCBCBC'} />
               </IconButton>
             </Box>
           ))}
@@ -260,7 +177,6 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({
             },
           }}
           onClick={() => {
-            // Handle clear all
             onClose();
           }}
         >

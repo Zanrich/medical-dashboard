@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-
 interface User {
   id: string;
   firstName: string;
@@ -14,9 +13,7 @@ export const useAuth = () => {
 
   const login = useCallback(async (email: string, password: string) => {
     try {
-      // Simulate API call
       setLoading(true);
-      // In real implementation, make API call here
       setUser({
         id: '1',
         firstName: 'Adrian',

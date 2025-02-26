@@ -1,4 +1,5 @@
-import { createTheme, PaletteOptions } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
+
 import { COLORS, BREAKPOINTS } from './constants';
 import '../assets/fonts/Montserrat.css';
 
@@ -50,8 +51,8 @@ export const theme = createTheme({
     },
     grey: {
       100: COLORS.grey[100],
-      200:  COLORS.grey[200],
-      300:  COLORS.grey[300],
+      200: COLORS.grey[200],
+      300: COLORS.grey[300],
     },
   },
   breakpoints: {
