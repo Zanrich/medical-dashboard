@@ -155,7 +155,7 @@ export const Sidebar: React.FC = () => {
             mb: 2,
             px: '20px',
             py: '18px',
-            bgcolor: `linear-gradient(0deg, #FFFFFF, rgba(157, 157, 157, 0.08))`,
+            bgcolor: `#9D9D9D14`,
             borderRadius: 2,
             cursor: 'pointer',
             transition: 'all 0.2s ease-in-out',
