@@ -31,6 +31,7 @@ import internalIcon from'../../assets/icons/InternalIcon.png';
 import logIcon from'../../assets/icons/logs.png';
 import usersIcon from'../../assets/icons/users.png';
 import patientIcon from'../../assets/icons/folder.png';
+import { motion } from 'framer-motion';
 
 // Add this new styled component for the burger menu button
 const MenuButton = styled(IconButton)(({ theme }) => ({
