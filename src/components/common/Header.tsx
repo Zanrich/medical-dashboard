@@ -110,6 +110,7 @@ export const Header: React.FC = () => {
             alignItems: 'center',
             height: 40,
             marginLeft: 1.5,
+            cursor: 'pointer',
           }}
         >
           <Avatar
@@ -128,7 +129,16 @@ export const Header: React.FC = () => {
           {isLargeDown && (
             <>
               <Typography sx={{ ml: 1.5, fontWeight: 600, fontSize: 14 }}>Adrian Stefan</Typography>
-              <KeyboardArrowDownIcon sx={{ width: 16, height: 16, ml: 1.5, color: '#67ADB9' }} />
+              <KeyboardArrowDownIcon
+                sx={{
+                  width: 16,
+                  height: 16,
+                  ml: 1.5,
+                  color: '#67ADB9',
+                  transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
             </>
           )}
         </Box>
