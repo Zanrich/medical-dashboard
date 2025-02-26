@@ -30,14 +30,19 @@ const MenuButton = styled(IconButton)(({ theme }) => ({
   left: theme.spacing(2),
   zIndex: theme.zIndex.drawer + 1,
   display: 'none',
-  [theme.breakpoints.down('lg')]: {
-    height: '64px',
+  [theme.breakpoints.down('md')]: {
+    top: 0,
+    height: '56px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  [theme.breakpoints.down('md')]: {
-    height: '56px',
+  [theme.breakpoints.down('lg')]: {
+    top: 0,
+    height: '64px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
