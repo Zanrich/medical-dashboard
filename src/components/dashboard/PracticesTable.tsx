@@ -29,6 +29,8 @@ import EditIcon from '../../assets/icons/edit.png';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteIcon from '../../assets/icons/trash.png';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Practice {
   name: string;
@@ -48,10 +50,13 @@ const StatusSwitch = styled(Switch)(({ theme }) => ({
     color: '#67ADB9',
   },
   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: '#E4F7F9',
+    backgroundColor: '#67ADB952',
   },
   '& .MuiSwitch-track': {
-    backgroundColor: theme.palette.grey[400],
+    backgroundColor:'#9D9D9D',
+  },
+  '& .MuiSwitch-switchBase': {
+    color:'#F5F5F5',
   },
 }));
 
@@ -96,6 +101,7 @@ const StyledStatusCell = ({ status }: { status: 'active' | 'disabled' }) => {
 };
 
 export const PracticesTable: React.FC = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<Practice | null>(null);
@@ -219,20 +225,18 @@ export const PracticesTable: React.FC = () => {
           </TableBody>
         </Table>
       </StyledTableContainer>
-      <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end', borderTop: 1, borderColor:' #9D9D9D3D'  }}>
-        <Link
-          href="#"
+      <Box onClick={() => navigate("/practices")} sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderTop: 1, borderColor:' #9D9D9D3D'  }}>
+        <Typography
           sx={{
-            color: 'primary.main',
-            textDecoration: 'none',
-            fontSize: '0.875rem',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
+            color: '#5F97A0',
+            fontSize: '12px',
+            lineHeight: '20px',
+            fontWeight: 600,
           }}
         >
           See All
-        </Link>
+        </Typography>
+        <KeyboardArrowRightIcon sx={{width: 18, height: 18, ml: 1, color: '#5F97A0'}}/>
       </Box>
       
       <Dialog open={modalOpen} onClose={handleCloseModal}>
