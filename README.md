@@ -14,10 +14,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm run format`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs prettier to clean up the code.
+
+### `npm run lint`
+
+Runs ESLint to check for common es errors. 
 
 ### `npm run build`
 
@@ -44,3 +47,16 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### `Assignment Answers`
+a. How long the assessment took you in man hours?
+
+This has taken me around 17-19 hours to complete.
+
+b. List any functionality you were not able to complete or known issues within the code you were not able to resolve?
+
+I am not sure of known issues, and I did try completing everything to the  best of my abilities. 
+
+c. What parts of the test were most challenging to you?
+
+The most challenging part was the little triangle effect on the notification and profile modals, to implement it and to get it perfect. 
